@@ -1,0 +1,50 @@
+// State Tracking Variables
+let name = "";
+let count = 0;
+
+// Grabbing Document Elements
+const nameInput = document.getElementById("nameInput");
+const greetingMessage = document.getElementById("greetingMessage");
+const counterMessage = document.getElementById("counterMessage");
+const incrementBtn = document.getElementById("incrementBtn");
+const decrementBtn = document.getElementById("decrementBtn");
+const resetBtn = document.getElementById("resetBtn");
+
+// UI Engine function to track changes and conditionally render views
+function render() {
+    // 1. Conditional Layout: Greetings
+    if (name.trim() === "") {
+        greetingMessage.textContent = "Please enter your name";
+    } else {
+        greetingMessage.textContent = `Hello, ${name}!`;
+    }
+
+    // 2. Dynamic Layout: Counter Messaging
+    if (count > 0) {
+        counterMessage.textContent = `${name || 'Someone'}, you tapped ${count} times!`;
+    } else {
+        counterMessage.textContent = "Tap the + button to start";
+    }
+}
+
+// Handling Value Inputs
+nameInput.addEventListener("input", (event) => {
+    name = event.target.value;
+    render();
+});
+
+// Handling Interaction Actions (OnPress)
+incrementBtn.addEventListener("click", () => {
+    count++;
+    render();
+});
+
+decrementBtn.addEventListener("click", () => {
+    count--;
+    render();
+});
+
+resetBtn.addEventListener("click", () => {
+    count = 0;
+    render();
+});
